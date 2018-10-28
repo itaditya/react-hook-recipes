@@ -1,0 +1,21 @@
+{
+  "name": "react-hooks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build && next export",
+    "deploy": "npm run build && surge -p out/ -d https://reacthooks.surge.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^7.0.2",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.3",
+    "react-highlight.js": "^1.0.7"
+  }
+}
