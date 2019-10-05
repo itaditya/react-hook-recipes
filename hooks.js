@@ -220,7 +220,7 @@ export const hooks = [
         </h1>
       );
     }
-=======
+    `
   }, {
     name: "useMedia",
     author: "Ryan Florence",
