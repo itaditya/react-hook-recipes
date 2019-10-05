@@ -160,7 +160,7 @@ export const hooks = [
     author: "Gabe Ragland",
     link: "https://codesandbox.io/s/z64on3ypm",
     description:
-      "react hook that checks if addEventListener is supported, add the event listener, and removal it on cleanup",
+      "react hook that checks if addEventListener is supported, add the event listener, and remove it during cleanup",
     implementationCode: `
     function useEventListener(eventName, handler, element = window){
       // Create a ref that stores handler
