@@ -1,7 +1,7 @@
 export const hooks = [
   {
-    name: "useArray",
-    author: "kitze",
+    name: 'useArray',
+    author: 'kitze',
     link: "https://github.com/kitze/react-hanger",
     description: "react hook to manage array state",
     implementationCode: `
@@ -50,8 +50,8 @@ export const hooks = [
       `
   },
   {
-    name: "useBoolean",
-    author: "kitze",
+    name: 'useBoolean',
+    author: 'kitze',
     link: "https://github.com/kitze/react-hanger",
     description: "react hook to manage boolean state",
     implementationCode: `
@@ -83,8 +83,8 @@ export const hooks = [
     `
   },
   {
-    name: "useOnlineStatus",
-    author: "mathdroid",
+    name: 'useOnlineStatus',
+    author: 'mathdroid',
     link: "https://github.com/rehooks/online-status",
     description: "react hook for online status",
     implementationCode: `
@@ -126,8 +126,8 @@ export const hooks = [
     `
   },
   {
-    name: "useDocumentTitle",
-    author: "iamsolankiamit",
+    name: 'useDocumentTitle',
+    author: 'iamsolankiamit',
     link: "https://github.com/rehooks/document-title",
     description: "react hook for updating the document-title",
     implementationCode: `
@@ -156,8 +156,8 @@ export const hooks = [
     `
   },
   {
-    name: "useEventListener",
-    author: "Gabe Ragland",
+    name: 'useEventListener',
+    author: 'Gabe Ragland',
     link: "https://codesandbox.io/s/z64on3ypm",
     description:
       "react hook that checks if addEventListener is supported, add the event listener, and remove it during cleanup",
@@ -222,8 +222,8 @@ export const hooks = [
     }
     `
   }, {
-    name: "useMedia",
-    author: "Ryan Florence",
+    name: 'useMedia',
+    author: 'Ryan Florence',
     link: "https://github.com/ryanflorence/react-conf-2018",
     description: "React hook for using a CSS media query",
     implementationCode: `
