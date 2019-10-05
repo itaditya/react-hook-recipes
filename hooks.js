@@ -220,6 +220,51 @@ export const hooks = [
         </h1>
       );
     }
+=======
+  }, {
+    name: "useMedia",
+    author: "Ryan Florence",
+    link: "https://github.com/ryanflorence/react-conf-2018",
+    description: "React hook for using a CSS media query",
+    implementationCode: `
+  const { useEffect, useState } = require('react');
+
+  export function useMedia(query) {
+    let [matches, setMatches] = useState(
+      window.matchMedia(query).matches
+    );
+  
+    useEffect(() => {
+        let media = window.matchMedia(query);
+        if (media.matches !== matches) {
+          setMatches(media.matches);
+        }
+        let listener = () => setMatches(media.matches);
+        media.addListener(listener);
+        return () => media.removeListener(listener);
+      },
+      [query]
+    );
+  
+    return matches;
+  }
+    `,
+    usageCode: `
+  const App = () => {
+    return <NestedComponent />;
+  }
+
+  const NestedComponent = () => {
+    let small = useMedia("(max-width: 400px)");
+    let large = useMedia("(min-width: 800px)");
+    return (
+      <div className="Media">
+        <h1>Media</h1>
+        <p>Small? {small ? "Yep" : "Nope"}.</p>
+        <p>Large? {large ? "Yep" : "Nope"}.</p>
+      </div>
+    );
+  }
     `
   }
 ];
