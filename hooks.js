@@ -1,6 +1,6 @@
 export const hooks = [
   {
-    name: "useArray",
+    name: 'useArray',
     author: 'kitze',
     link: "https://github.com/kitze/react-hanger",
     description: "react hook to manage array state",
@@ -48,8 +48,9 @@ export const hooks = [
       )
     }
       `
-  }, {
-    name: "useBoolean",
+  },
+  {
+    name: 'useBoolean',
     author: 'kitze',
     link: "https://github.com/kitze/react-hanger",
     description: "react hook to manage boolean state",
@@ -80,8 +81,9 @@ export const hooks = [
     )
   }
     `
-  }, {
-    name: "useOnlineStatus",
+  },
+  {
+    name: 'useOnlineStatus',
     author: 'mathdroid',
     link: "https://github.com/rehooks/online-status",
     description: "react hook for online status",
@@ -122,8 +124,9 @@ export const hooks = [
     );
   }
     `
-  }, {
-    name: "useDocumentTitle",
+  },
+  {
+    name: 'useDocumentTitle',
     author: 'iamsolankiamit',
     link: "https://github.com/rehooks/document-title",
     description: "react hook for updating the document-title",
@@ -151,9 +154,76 @@ export const hooks = [
     );
   }
     `
+  },
+  {
+    name: 'useEventListener',
+    author: 'Gabe Ragland',
+    link: "https://codesandbox.io/s/z64on3ypm",
+    description:
+      "react hook that checks if addEventListener is supported, add the event listener, and remove it during cleanup",
+    implementationCode: `
+    function useEventListener(eventName, handler, element = window){
+      // Create a ref that stores handler
+      const savedHandler = useRef();
+      
+      // Update ref.current value if handler changes.
+      // This allows our effect below to always get latest handler ...
+      // ... without us needing to pass it in effect deps array ...
+      // ... and potentially cause effect to re-run every render.
+      useEffect(() => {
+        savedHandler.current = handler;
+      }, [handler]);
+    
+      useEffect(
+        () => {
+          // Make sure element supports addEventListener
+          // On 
+          const isSupported = element && element.addEventListener;
+          if (!isSupported) return;
+          
+          // Create event listener that calls handler function stored in ref
+          const eventListener = event => savedHandler.current(event);
+          
+          // Add event listener
+          element.addEventListener(eventName, eventListener);
+          
+          // Remove event listener on cleanup
+          return () => {
+            element.removeEventListener(eventName, eventListener);
+          };
+        },
+        [eventName, element] // Re-run if eventName or element changes
+      );
+    };
+    `,
+    usageCode: `
+    function App(){
+      // State for storing mouse coordinates
+      const [coords, setCoords] = useState({ x: 0, y: 0 });
+      
+      // Event handler utilizing useCallback ...
+      // ... so that reference never changes.
+      const handler = useCallback(
+        ({ clientX, clientY }) => {
+          // Update coordinates
+          setCoords({ x: clientX, y: clientY });
+        },
+        [setCoords]
+      );
+      
+      // Add event listener using our hook
+      useEventListener('mousemove', handler);
+      
+      return (
+        <h1>
+          The mouse position is ({coords.x}, {coords.y})
+        </h1>
+      );
+    }
+    `
   }, {
-    name: "useMedia",
-    author: "Ryan Florence",
+    name: 'useMedia',
+    author: 'Ryan Florence',
     link: "https://github.com/ryanflorence/react-conf-2018",
     description: "React hook for using a CSS media query",
     implementationCode: `
