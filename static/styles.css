@@ -75,3 +75,19 @@ body {
 
 .description {
 }
+
+@media only screen and (max-width: 600px) {
+
+  body {
+    padding: 0px 10px 0px 10px;
+  }
+
+  .page-container {
+    overflow-x: hidden;
+  }
+  
+  .code-container {
+    flex-direction: column;
+  }
+
+}

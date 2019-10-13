@@ -6,7 +6,7 @@ import { hooks } from '../hooks';
 const Code = ({ children }) => <Highlight language='javascript' className='code' children={children} />
 
 export default () => (
-  <div>
+  <div className="page-container">
     <Head>
       <title>React Hooks</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
