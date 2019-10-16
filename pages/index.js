@@ -23,26 +23,47 @@ export default () => (
       </main>
       <hr />
     </nav>
-    {hooks.map(hook => (
-      <section key={hook.name}>
-        <h2 className="title">
-          <a href={hook.link} target="_blank">
-            {hook.name}
-          </a>
-          <span>- {hook.author}</span>
-        </h2>
-        <p className="description">{hook.description}</p>
-        <main className="code-container">
-          <section className="code-section">
-            <h4 className="heading">Implementation</h4>
-            <Code>{hook.implementationCode}</Code>
-          </section>
-          <section className="code-section">
-            <h4 className="heading">Usage</h4>
-            <Code>{hook.usageCode}</Code>
-          </section>
-        </main>
+    {hooks.length && (
+      <section>
+        <h2>Table of Contents</h2>
+        <ul>
+        {
+          hooks.map(hook => (
+            <li>
+              <a href={`#${hook.name}`} key={hook.name}>{hook.name}</a>
+            </li>
+          ))
+        }
+        </ul>
+        <hr />
       </section>
-    ))}
+    )}
+    {
+      hooks.map(hook => (
+        <section key={hook.name} id={hook.name}>
+          <h2 className="title">
+            <a href={hook.link} target="_blank">{hook.name}</a>
+            <span>- {hook.author}</span>
+          </h2>
+          <p className="description">
+            {hook.description}
+          </p>
+          <main className="code-container">
+            <section className="code-section">
+              <h4 className="heading">Implementation</h4>
+              <Code>
+                {hook.implementationCode}
+              </Code>
+            </section>
+            <section className="code-section">
+              <h4 className="heading">Usage</h4>
+              <Code>
+                {hook.usageCode}
+              </Code>
+            </section>
+          </main>
+        </section>
+      ))
+    }
   </div>
 );
