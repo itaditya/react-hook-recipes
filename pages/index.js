@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Highlight from 'react-highlight.js';
 
 import { hooks } from '../hooks';
+import Clipboard from "../components/clipboard/clipboard";
 
 const Code = ({ children }) => <Highlight language='javascript' className='code' children={children} />
 
@@ -41,6 +42,7 @@ export default () => (
               <Code>
                 {hook.implementationCode}
               </Code>
+              <Clipboard />
             </section>
             <section className="code-section">
               <h4 className="heading">Usage</h4>

@@ -1,0 +1,49 @@
+.clipboardButton {
+    position: absolute;
+    right: 15px;
+    top: 64px;
+    background: rgba(0, 0, 0, 0.5) url('/static/images/file_copy.svg') no-repeat center center;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+}
+
+.clipboardButton::before {
+    content: "Copied to Clipboard.";
+    pointer-events: none;
+    background: rgb(20, 22, 26);
+    transform: translateX(-50%);
+    padding: 5px;
+    top: -44px;
+    white-space: nowrap;
+    position: absolute;
+    color: #fff;
+    z-index: 100;
+    opacity: 0;
+    transition: 2s 0.5s ease opacity;
+}
+
+.clipboardButton::after {
+    top: -14px;
+    left: 50%;
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border: 10px solid rgba(136, 183, 213, 0);
+    border-top-color: rgb(20, 22, 26);
+    margin-left: -10px;
+    transition: 2s 0.5s ease opacity;
+    opacity: 0;
+}
+
+.clipboardButton:active::before {
+    opacity: 1;
+    transition: none;
+}
+
+.clipboardButton:active::after {
+    opacity: 1;
+    transition: none;
+}
