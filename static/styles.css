@@ -61,14 +61,6 @@ body {
   position: relative;
 }
 
-.code {
-  flex: 1;
-}
-
-.code > code {
-  height: 100%;
-}
-
 .heading {
   margin-top: 10px;
   margin-bottom: 5px;

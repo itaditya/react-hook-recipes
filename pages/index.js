@@ -1,10 +1,9 @@
 import Head from 'next/head';
-import Highlight from 'react-highlight.js';
 
 import { hooks } from '../hooks';
+import Code from "../components/code/code";
 import Clipboard from "../components/clipboard/clipboard";
-
-const Code = ({ children }) => <Highlight language='javascript' className='code' children={children} />
+import Navbar from "../components/navbar/navbar";
 
 export default () => (
   <div className="page-container">
@@ -15,17 +14,7 @@ export default () => (
       <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
       <link href="/static/styles.css" rel="stylesheet" />
     </Head>
-    <nav className="navbar">
-      <main>
-        <h1>
-          React Hooks
-        </h1>
-        <a href="https://github.com/itaditya" target="_blank">
-          Github
-        </a>
-      </main>
-      <hr />
-    </nav>
+    <Navbar />
     {
       hooks.map(hook => (
         <section key={hook.name}>
