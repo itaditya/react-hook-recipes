@@ -32,6 +32,7 @@ class Hook extends Component {
             <Code>
               {this.hook.usageCode}
             </Code>
+            <Clipboard />
           </section>
         </main>
       </section>
