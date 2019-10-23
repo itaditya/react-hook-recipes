@@ -1,0 +1,7 @@
+.code {
+    flex: 1;
+}
+
+.code > code {
+    height: 100%;
+}

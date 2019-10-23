@@ -58,14 +58,7 @@ body {
   margin-right: 20px;
   display: flex;
   flex-direction: column;
-}
-
-.code {
-  flex: 1;
-}
-
-.code > code {
-  height: 100%;
+  position: relative;
 }
 
 .heading {
