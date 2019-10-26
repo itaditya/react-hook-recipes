@@ -308,7 +308,7 @@ export const hooks = [
   {
     name: 'useWindowDimensions',
     author: 'Mirco Bellagamba',
-    link: "https://github.com/mbellagamba/feel-your-movie",
+    link: "https://github.com/mbellagamba/feel-your-movie/blob/master/src/hooks/index.js",
     description: "React hook for getting the window width and height",
     implementationCode: `
     import { useState, useEffect } from 'react';
