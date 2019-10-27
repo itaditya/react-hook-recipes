@@ -304,5 +304,48 @@ export const hooks = [
         );
       }
     `
+  },
+  {
+    name: 'useWindowDimensions',
+    author: 'Mirco Bellagamba',
+    link: "https://github.com/mbellagamba/feel-your-movie/blob/master/src/hooks/index.js",
+    description: "React hook for getting the window width and height",
+    implementationCode: `
+    import { useState, useEffect } from 'react';
+
+    function getWindowDimensions() {
+      const { innerWidth: width, innerHeight: height } = window;
+      return {
+        width,
+        height,
+      };
+    }
+
+    export function useWindowDimensions() {
+      const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+      useEffect(() => {
+        function handleResize() {
+          setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+      }, []);
+
+      return windowDimensions;
+    }
+    `,
+    usageCode: `
+    const App = () => {
+      const { width, height } = useWindowDimensions();
+      return (
+        <div>
+          <p>The window width is <span>{width}</span></p>
+          <p>The window width is <span>{height}</span></p>
+        </div>
+      )
+    }
+    `
   }
 ];
