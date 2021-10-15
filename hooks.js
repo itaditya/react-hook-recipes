@@ -165,7 +165,7 @@ export const hooks = [
     function useEventListener(eventName, handler, element = window){
       // Create a ref that stores handler
       const savedHandler = useRef();
-      
+
       // Update ref.current value if handler changes.
       // This allows our effect below to always get latest handler ...
       // ... without us needing to pass it in effect deps array ...
@@ -173,20 +173,20 @@ export const hooks = [
       useEffect(() => {
         savedHandler.current = handler;
       }, [handler]);
-    
+
       useEffect(
         () => {
           // Make sure element supports addEventListener
-          // On 
+          // On
           const isSupported = element && element.addEventListener;
           if (!isSupported) return;
-          
+
           // Create event listener that calls handler function stored in ref
           const eventListener = event => savedHandler.current(event);
-          
+
           // Add event listener
           element.addEventListener(eventName, eventListener);
-          
+
           // Remove event listener on cleanup
           return () => {
             element.removeEventListener(eventName, eventListener);
@@ -200,7 +200,7 @@ export const hooks = [
     function App(){
       // State for storing mouse coordinates
       const [coords, setCoords] = useState({ x: 0, y: 0 });
-      
+
       // Event handler utilizing useCallback ...
       // ... so that reference never changes.
       const handler = useCallback(
@@ -210,10 +210,10 @@ export const hooks = [
         },
         [setCoords]
       );
-      
+
       // Add event listener using our hook
       useEventListener('mousemove', handler);
-      
+
       return (
         <h1>
           The mouse position is ({coords.x}, {coords.y})
@@ -233,7 +233,7 @@ export const hooks = [
     let [matches, setMatches] = useState(
       window.matchMedia(query).matches
     );
-  
+
     useEffect(() => {
         let media = window.matchMedia(query);
         if (media.matches !== matches) {
@@ -245,7 +245,7 @@ export const hooks = [
       },
       [query]
     );
-  
+
     return matches;
   }
     `,
@@ -277,12 +277,12 @@ export const hooks = [
         // The ref object is a generic container whose current property is mutable ...
         // ... and can hold any value, similar to an instance property on a class
         const ref = useRef();
-        
+
         // Store current value in ref
         useEffect(() => {
           ref.current = value;
         }, [value]); // Only re-run if value changes
-        
+
         // Return previous value (happens before update in useEffect above)
         return ref.current;
       }
@@ -291,10 +291,10 @@ export const hooks = [
       function App() {
         // State value and setter for our example
         const [count, setCount] = useState(0);
-        
+
         // Get the previous value (was passed into hook on last render)
         const prevCount = usePrevious(count);
-        
+
         // Display both current and previous count value
         return (
           <div>
@@ -345,6 +345,69 @@ export const hooks = [
           <p>The window width is <span>{height}</span></p>
         </div>
       )
+    }
+    `
+  },
+  {
+    name: 'useLocalStorage',
+    author: 'Gabe Ragland',
+    link: "https://codesandbox.io/s/qxkr4mplv6",
+    description: "React hook for syncing state to local storage.",
+    implementationCode: `
+    import { useState } from "react";
+
+    function useLocalStorage(key, initialValue) {
+      // State to store our value
+      // Pass initial state function to useState so logic is only executed once
+      const [storedValue, setStoredValue] = useState(() => {
+        try {
+          // Get from local storage by key
+          const item = window.localStorage.getItem(key);
+          // Parse stored json or if none return initialValue
+          return item ? JSON.parse(item) : initialValue;
+        } catch (error) {
+          // If error also return initialValue
+          console.log(error);
+          return initialValue;
+        }
+      });
+
+      // Return a wrapped version of useState's setter function that ...
+      // ... persists the new value to localStorage.
+      const setValue = (value) => {
+        try {
+          // Allow value to be a function so we have same API as useState
+          const valueToStore =
+            value instanceof Function ? value(storedValue) : value;
+          // Save state
+          setStoredValue(valueToStore);
+          // Save to local storage
+          window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        } catch (error) {
+          // A more advanced implementation would handle the error case
+          console.log(error);
+        }
+      };
+
+      return [storedValue, setValue];
+    }
+    `,
+    usageCode: `
+    import { useState } from "react";
+
+    function App() {
+      // Similar to useState but first arg is key to the value in local storage.
+      const [name, setName] = useLocalStorage("name", "Bob");
+      return (
+        <div>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+      );
     }
     `
   }

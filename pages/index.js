@@ -29,8 +29,8 @@ export default () => (
         <ul>
         {
           hooks.map(hook => (
-            <li>
-              <a href={`#${hook.name}`} key={hook.name}>{hook.name}</a>
+            <li key={hook.name}>
+              <a href={`#${hook.name}`}>{hook.name}</a>
             </li>
           ))
         }
